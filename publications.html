@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications - ITU Human Rights Society</title>
+  <link rel="icon" type="image/png" href="hrs.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --beige: #f5f1e6;
+      --light-brown: #d6cec2;
+      --medium-brown: #9c8a7e;
+      --dark-brown: #5c4b41;
+      --accent: #8b5e3c;
+      --text: #3e3e3e;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background: var(--beige);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: var(--dark-brown);
+      margin-bottom: 1rem;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: var(--white);
+      padding: 1rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-left, .logo-right {
+      flex: 1;
+    }
+
+    .logo-center {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .uni-logo, .society-logo {
+      height: 60px;
+      width: auto;
+    }
+
+    .logo-icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-brown);
+      text-align: center;
+    }
+
+    nav {
+      background: var(--dark-brown);
+      padding: 0.8rem 0;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    nav ul li a {
+      color: var(--beige);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--beige);
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover:after {
+      width: 100%;
+    }
+
+    nav ul li a:hover {
+      color: var(--white);
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      flex: 1;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      color: var(--medium-brown);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Publications Graphics */
+    .publications-graphic {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .publications-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Search and Filter */
+    .search-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 0.8rem 2.5rem 0.8rem 1rem;
+      border: 1px solid var(--light-brown);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-bar:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.5rem;
+      background: var(--white);
+      border: 1px solid var(--light-brown);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+    }
+
+    /* Publications Grid */
+    .publications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .publication-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .publication-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .publication-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .publication-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .publication-card:hover .publication-img img {
+      transform: scale(1.05);
+    }
+
+    .publication-content {
+      padding: 1.5rem;
+    }
+
+    .publication-content h3 {
+      color: var(--dark-brown);
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .publication-meta {
+      font-size: 0.9rem;
+      color: var(--medium-brown);
+      margin-bottom: 1rem;
+    }
+
+    .publication-content p {
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .read-more {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .read-more:hover {
+      color: var(--dark-brown);
+      transform: translateX(5px);
+    }
+
+    .read-more:after {
+      content: '→';
+      margin-left: 5px;
+    }
+
+    .publication-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Article Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background: var(--white);
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 800px;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark-brown);
+    }
+
+    .modal-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-body {
+      line-height: 1.8;
+    }
+
+    .modal-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* No Results */
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      grid-column: 1 / -1;
+      color: var(--medium-brown);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-brown);
+      color: var(--beige);
+      padding: 3rem 0 1.5rem;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section {
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      color: var(--beige);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-section h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--light-brown);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--beige);
+      transform: translateX(5px);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(245, 241, 230, 0.1);
+      border-radius: 50%;
+      color: var(--beige);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(245, 241, 230, 0.1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .logo-left, .logo-right {
+        display: none;
+      }
+      
+      nav ul {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .publications-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo-left">
+        <img src="Logo-ITU-NEW.png" alt="ITU Logo" class="uni-logo">
+      </div>
+      <div class="logo-center">
+        <div class="logo-icon"><i class="fas fa-hands-helping"></i></div>
+        <div class="logo-text">ITU Human Rights Society</div>
+      </div>
+      <div class="logo-right">
+        <img src="hrs.png" alt="HRS Logo" class="society-logo">
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="recruitment.html">Recruitment</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="section-title">
+      <h2>Human Rights Publications</h2>
+      <p>Research, analysis, and insights on human rights issues in Pakistan</p>
+    </div>
+
+    <!-- <div class="publications-graphic">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Human Rights Publications" class="publications-image">
+    </div> -->
+
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search articles by title, content, or tags..." class="search-bar">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="all">All Articles</button>
+      <button class="filter-btn" data-filter="women">Women's Rights</button>
+      <button class="filter-btn" data-filter="minorities">Minority Rights</button>
+      <button class="filter-btn" data-filter="freedom">Freedom of Expression</button>
+      <button class="filter-btn" data-filter="labor">Labor Rights</button>
+      <button class="filter-btn" data-filter="education">Education</button>
+    </div>
+
+    <div class="publications-grid" id="publicationsGrid">
+      <!-- Article 1 -->
+      <article class="publication-card" data-category="women">
+        <div class="publication-img">
+          <img src="women rights.webp" alt="Women's Rights in Pakistan">
+        </div>
+        <span class="publication-tag">Women's Rights</span>
+        <div class="publication-content">
+          <h3>Women's Rights in Pakistan: Progress and Challenges</h3>
+          <p class="publication-meta">By Ayesha Khan | April 12, 2024</p>
+          <p>Pakistan has made significant strides in women's rights legislation, but implementation remains a challenge. This article examines the disparity between legal frameworks and ground realities, focusing on issues like honor killings, educational access, and economic empowerment.</p>
+          <a href="#" class="read-more" data-article="article1">Read Full Article</a>
+        </div>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="publication-card" data-category="minorities">
+        <div class="publication-img">
+          <img src="minority.jpg" alt="Religious Minorities in Pakistan">
+        </div>
+        <span class="publication-tag">Minority Rights</span>
+        <div class="publication-content">
+          <h3>Protecting Religious Minorities in Pakistan</h3>
+          <p class="publication-meta">By Farhan Ahmed | March 28, 2024</p>
+          <p>Religious minorities in Pakistan continue to face discrimination despite constitutional protections. This analysis explores the challenges faced by Hindu, Christian, and Ahmadiyya communities, including issues related to blasphemy laws, forced conversions, and property rights.</p>
+          <a href="#" class="read-more" data-article="article2">Read Full Article</a>
+        </div>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="publication-card" data-category="freedom">
+        <div class="publication-img">
+          <img src="freedom.jpg" alt="Digital Rights in Pakistan">
+        </div>
+        <span class="publication-tag">Freedom of Expression</span>
+        <div class="publication-content">
+          <h3>Digital Rights and Freedom of Expression in Pakistan</h3>
+          <p class="publication-meta">By Bilal Hassan | March 15, 2024</p>
+          <p>As Pakistan's digital landscape expands, so do concerns about online freedom of expression. This piece examines the PECA legislation, internet shutdowns in conflict regions, and the growing digital divide.</p>
+          <a href="#" class="read-more" data-article="article3">Read Full Article</a>
+        </div>
+      </article>
+
+      <!-- Article 4 -->
+      <article class="publication-card" data-category="labor">
+        <div class="publication-img">
+          <img src="labor.jpg" alt="Labor Rights in Pakistan">
+        </div>
+        <span class="publication-tag">Labor Rights</span>
+        <div class="publication-content">
+          <h3>Labor Rights in Pakistan's Informal Economy</h3>
+          <p class="publication-meta">By Sara Rizvi | February 22, 2024</p>
+          <p>Over 70% of Pakistan's workforce is employed in the informal sector with limited legal protections. This research focuses on the challenges faced by domestic workers, agricultural laborers, and street vendors.</p>
+          <a href="#" class="read-more" data-article="article4">Read Full Article</a>
+        </div>
+      </article>
+
+      <!-- Article 5 -->
+      <article class="publication-card" data-category="education">
+        <div class="publication-img">
+          <img src="girl education.jpg" alt="Education Rights for Girls">
+        </div>
+        <span class="publication-tag">Education</span>
+        <div class="publication-content">
+          <h3>Barriers to Girls' Education in Rural Pakistan</h3>
+          <p class="publication-meta">By Hina Javed | February 10, 2024</p>
+          <p>Despite government initiatives, gender disparity in education remains significant in Pakistan's rural areas. This field research from Balochistan and Khyber Pakhtunkhwa identifies cultural norms, infrastructure limitations, and security concerns as major obstacles.</p>
+          <a href="#" class="read-more" data-article="article5">Read Full Article</a>
+        </div>
+      </article>
+
+      <!-- Article 6 -->
+      <article class="publication-card" data-category="minorities">
+        <div class="publication-img">
+          <img src="hindu.webp" alt="Hindu Community in Pakistan">
+        </div>
+        <span class="publication-tag">Minority Rights</span>
+        <div class="publication-content">
+          <h3>The Hindu Community's Struggle for Cultural Preservation</h3>
+          <p class="publication-meta">By Rajesh Kumar | January 30, 2024</p>
+          <p>Pakistan's Hindu community, particularly in Sindh province, faces challenges in preserving cultural and religious sites while combating forced conversions. This article documents community efforts to protect temples and celebrate religious festivals despite security concerns.</p>
+          <a href="#" class="read-more" data-article="article6">Read Full Article</a>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Article Modals -->
+  <div class="modal" id="articleModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <p class="publication-meta" id="modalMeta"></p>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Article content will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>ITU Human Rights Society</h3>
+        <p>Advocating for justice, equality, and human dignity within the ITU community and beyond.</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/humanrights_itu/"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="our-work.html">Our Work</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="recruitment.html">Recruitment</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p><i class="fas fa-envelope"></i> hrs.itu@itu.edu.pk</p>
+        <p><i class="fas fa-map-marker-alt"></i> ITU Barki Campus, Lahore</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 ITU Human Rights Society. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Article data
+    const articles = {
+      article1: {
+        title: "Women's Rights in Pakistan: Progress and Challenges",
+        meta: "By Ayesha Khan | April 12, 2024",
+        content: `
+          <p>Pakistan has made significant strides in women's rights legislation over the past two decades, with laws addressing honor killings, sexual harassment, and acid attacks. However, the implementation of these laws remains a significant challenge due to cultural norms, patriarchal structures, and inadequate enforcement mechanisms.</p>
+          
+          <p>In rural areas, women continue to face severe restrictions on their mobility, education, and employment opportunities. According to recent reports, female literacy rates in some regions of Balochistan and Khyber Pakhtunkhwa remain below 20%, significantly lower than the national average of 48%.</p>
+          
+          <p>Honor killings, though officially criminalized, continue to occur with alarming frequency. In 2023, the Human Rights Commission of Pakistan documented over 400 cases of honor-based violence, though the actual numbers are believed to be much higher due to underreporting.</p>
+          
+          <p>Economic empowerment remains another critical challenge. While urban centers have seen an increase in female participation in the workforce, women constitute only 22% of Pakistan's formal labor force, one of the lowest rates in South Asia.</p>
+          
+          <p>Despite these challenges, there are signs of progress. Women's rights organizations have become increasingly vocal and effective in advocating for change. Digital platforms have provided new avenues for awareness and activism, particularly among younger generations.</p>
+          
+          <p>The future of women's rights in Pakistan will depend on strengthening implementation mechanisms, changing deep-seated cultural attitudes through education, and ensuring women's representation in decision-making processes at all levels.</p>
+        `
+      },
+      article2: {
+        title: "Protecting Religious Minorities in Pakistan",
+        meta: "By Farhan Ahmed | March 28, 2024",
+        content: `
+          <p>Pakistan's religious minorities, including Hindus, Christians, Sikhs, and Ahmadiyya Muslims, continue to face systematic discrimination and violence despite constitutional protections. The country's blasphemy laws, in particular, have been widely criticized for being misused to target minority communities.</p>
+          
+          <p>According to the National Commission for Justice and Peace, over 1,800 people have been charged under blasphemy laws since 1987, with a significant proportion belonging to religious minorities. These laws carry a potential death sentence and have been weaponized in personal disputes and to settle scores.</p>
+          
+          <p>Forced conversions, particularly of Hindu and Christian girls, remain a pressing concern. In Sindh province, an estimated 1,000 girls from religious minorities are forced to convert to Islam annually, often through coercion, abduction, or marriage to Muslim men.</p>
+          
+          <p>Property rights present another significant challenge. Places of worship for religious minorities face threats of encroachment and destruction. The Hindu community, in particular, has struggled to protect its temples and cremation grounds.</p>
+          
+          <p>Positive developments include the establishment of the National Commission for Minorities in 2020 and the implementation of a 5% quota for religious minorities in government jobs. However, these measures have had limited impact due to poor implementation and resistance at local levels.</p>
+          
+          <p>Addressing these challenges requires comprehensive legal reforms, particularly of blasphemy laws, stronger enforcement of existing protections, and initiatives to promote interfaith dialogue and understanding. Education reform that includes content promoting religious tolerance is also essential for long-term change.</p>
+        `
+      },
+      article3: {
+        title: "Digital Rights and Freedom of Expression in Pakistan",
+        meta: "By Bilal Hassan | March 15, 2024",
+        content: `
+          <p>As Pakistan's digital landscape expands, with over 100 million internet users and 80 million social media users, concerns about digital rights and freedom of expression have come to the forefront. The government's approach to internet governance has often prioritized security over rights, leading to increasing restrictions on digital spaces.</p>
+          
+          <p>The Prevention of Electronic Crimes Act (PECA) 2016 has been particularly controversial. While intended to combat cybercrime, its vague provisions have been used to target journalists, activists, and government critics. In 2023, over 500 cases were registered under PECA, many involving charges related to criticism of state institutions.</p>
+          
+          <p>Internet shutdowns have become another tool of control, particularly in regions with political unrest or during periods of civil unrest. Pakistan consistently ranks among the top countries for intentional internet disruptions, with the longest recorded shutdown lasting over 2,000 hours in tribal districts.</p>
+          
+          <p>Surveillance practices have also raised concerns. The Pakistan Telecommunication Authority's requirement for biometric verification of SIM cards and its push for traceability in encrypted messaging apps like WhatsApp threaten user privacy and anonymity.</p>
+          
+          <p>Despite these challenges, digital platforms have become vital spaces for civic engagement and dissent. Social media campaigns have raised awareness about issues ranging from gender-based violence to government accountability. Digital rights organizations have emerged as important advocates for internet freedom.</p>
+          
+          <p>Protecting digital rights in Pakistan will require reforming problematic legislation like PECA, establishing independent oversight of surveillance practices, and promoting digital literacy that includes awareness of digital rights and security.</p>
+        `
+      },
+      article4: {
+        title: "Labor Rights in Pakistan's Informal Economy",
+        meta: "By Sara Rizvi | February 22, 2024",
+        content: `
+          <p>Pakistan's informal economy employs approximately 75% of the non-agricultural workforce, encompassing sectors from domestic work to small-scale manufacturing. Workers in these sectors face significant challenges, including lack of legal protections, job insecurity, and exploitation.</p>
+          
+          <p>Domestic workers, predominantly women, operate without legal recognition in most provinces. They typically work long hours without contracts, fixed wages, or social security benefits. Physical and verbal abuse is common, with limited avenues for redress.</p>
+          
+          <p>Agricultural laborers, particularly in Sindh and Punjab, often work in conditions resembling debt bondage. Landowners provide advances to workers who then find themselves trapped in cycles of debt that can span generations. Child labor remains prevalent in this sector despite legal prohibitions.</p>
+          
+          <p>Street vendors and daily wage workers face constant insecurity, with their livelihoods threatened by eviction drives and lack of social protection. The COVID-19 pandemic highlighted their vulnerability, as lockdowns left millions without income or support.</p>
+          
+          <p>Recent legislative developments offer some hope. Sindh has enacted laws protecting domestic workers and home-based workers, setting minimum wages and requiring written contracts. Punjab has introduced a policy for social security registration of informal workers, though implementation remains limited.</p>
+          
+          <p>Strengthening labor rights in the informal economy requires expanding legal protections, improving implementation mechanisms, and facilitating workers' organization. Social protection floors that cover informal workers are essential for reducing vulnerability.</p>
+        `
+      },
+      article5: {
+        title: "Barriers to Girls' Education in Rural Pakistan",
+        meta: "By Hina Javed | February 10, 2024",
+        content: `
+          <p>Despite constitutional guarantees and various government initiatives, gender disparity in education remains stark in Pakistan's rural areas. While urban centers have seen significant improvements in girls' education, rural regions continue to lag behind, with female literacy rates as low as 15% in some districts.</p>
+          
+          <p>Cultural norms and practices constitute the primary barrier. In many conservative communities, girls' education is viewed as unnecessary or even undesirable. Early marriage, often around ages 16-18, cuts short educational opportunities for many girls.</p>
+          
+          <p>Infrastructure limitations present another significant challenge. Many villages lack girls' schools, forcing students to travel long distances to access education. The absence of basic facilities like boundary walls, toilets, and drinking water in existing schools further discourages attendance.</p>
+          
+          <p>Security concerns, particularly in conflict-affected regions like former FATA areas, have led to school closures and attacks on educational institutions. The infamous attack on Malala Yousafzai in 2012 highlighted the extreme resistance to girls' education in some areas.</p>
+          
+          <p>Poverty remains a fundamental obstacle. Many families cannot afford direct costs like uniforms and books, or the opportunity costs of sending girls to school rather than having them contribute to household work or income generation.</p>
+          
+          <p>Successful initiatives include the establishment of community schools with female teachers, conditional cash transfer programs that incentivize girls' education, and mobile schooling models for nomadic communities. Scaling these approaches requires increased investment and community engagement.</p>
+        `
+      },
+      article6: {
+        title: "The Hindu Community's Struggle for Cultural Preservation",
+        meta: "By Rajesh Kumar | January 30, 2024",
+        content: `
+          <p>Pakistan's Hindu community, numbering approximately 4 million according to unofficial estimates, faces significant challenges in preserving its cultural and religious heritage. Concentrated primarily in Sindh province, the community has struggled to protect its places of worship and cultural practices amid growing religious intolerance.</p>
+          
+          <p>Temple preservation represents a particular concern. Many historical temples have fallen into disrepair or been encroached upon. The restoration of ancient sites like the Katas Raj temple complex has been slow, despite government promises and international attention.</p>
+          
+          <p>Religious festivals face increasing restrictions. While major festivals like Diwali and Holi are still celebrated, particularly in urban centers like Karachi, participants often face harassment and security concerns. In some areas, processions have been banned or limited due to security threats.</p>
+          
+          <p>Forced conversions remain a devastating issue, particularly for young Hindu women. Criminal gangs often abduct girls, force them to convert to Islam, and marry them to Muslim men. Despite legislation in Sindh aimed at preventing forced conversions, implementation remains weak.</p>
+          
+          <p>Political representation has improved with reserved seats for minorities in parliament and provincial assemblies. However, many Hindu leaders argue that these representatives lack real influence and fail to adequately address community concerns.</p>
+          
+          <p>Despite these challenges, the Hindu community has shown remarkable resilience. Cultural organizations have emerged to promote Hindu heritage, and youth groups are increasingly vocal about their rights. Interfaith initiatives have also created spaces for dialogue and understanding.</p>
+        `
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const publicationCards = document.querySelectorAll('.publication-card');
+      const modal = document.getElementById('articleModal');
+      const closeModal = document.querySelector('.close-modal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMeta = document.getElementById('modalMeta');
+      const modalBody = document.getElementById('modalBody');
+      
+      // Search functionality
+      searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        
+        publicationCards.forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const content = card.querySelector('.publication-content p').textContent.toLowerCase();
+          const category = card.getAttribute('data-category');
+          
+          if (title.includes(query) || content.includes(query) || category.includes(query)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        checkNoResults();
+      });
+      
+      // Filter functionality
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          const filter = this.getAttribute('data-filter');
+          
+          publicationCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            
+            if (filter === 'all' || filter === category) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+          
+          checkNoResults();
+        });
+      });
+      
+      // Read more functionality
+      document.querySelectorAll('.read-more').forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const articleId = this.getAttribute('data-article');
+          showArticle(articleId);
+        });
+      });
+      
+      // Close modal
+      closeModal.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+      
+      // Close modal when clicking outside
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+      
+      // Show article in modal
+      function showArticle(articleId) {
+        if (articles[articleId]) {
+          modalTitle.textContent = articles[articleId].title;
+          modalMeta.textContent = articles[articleId].meta;
+          modalBody.innerHTML = articles[articleId].content;
+          modal.style.display = 'block';
+        }
+      }
+      
+      // Check if no results are shown
+      function checkNoResults() {
+        const visibleCards = Array.from(publicationCards).filter(card => card.style.display !== 'none');
+        
+        if (visibleCards.length === 0) {
+          // Check if no results message already exists
+          if (!document.querySelector('.no-results')) {
+            const noResults = document.createElement('div');
+            noResults.className = 'no-results';
+            noResults.innerHTML = '<h3>No articles found matching your criteria</h3><p>Try different keywords or filters</p>';
+            document.getElementById('publicationsGrid').appendChild(noResults);
+          }
+        } else {
+          // Remove no results message if it exists
+          const noResults = document.querySelector('.no-results');
+          if (noResults) {
+            noResults.remove();
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
