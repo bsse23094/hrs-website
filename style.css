@@ -65,6 +65,12 @@ header {
 .uni-logo, .society-logo {
   height: 60px;
   width: auto;
+  transition: all 0.3s ease;
+}
+
+.uni-logo:hover, .society-logo:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 .logo-icon {
